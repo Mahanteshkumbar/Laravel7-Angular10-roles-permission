@@ -1,0 +1,60 @@
+<div class="row justify-content-center">
+<div class="col-5 justify-content-center">
+    <!-- Default form register -->
+    <form [formGroup]="registerForm" (ngSubmit)="registerUser()" class="text-center border border-light p-5">
+
+        <p class="h4 mb-4">Sign up</p>
+  
+        <!-- <div class="form-row mb-4">
+          <div class="col">
+            <input type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="First name">
+          </div>
+          <div class="col">
+            <input type="text" id="defaultRegisterFormLastName" class="form-control" placeholder="Last name">
+          </div>
+        </div> -->
+
+        <div *ngIf="serverErrors">
+          <p style="color:red;">{{ serverErrors.message }}</p>
+          <p style="color:red;">{{ serverErrors.errors.password }}</p>
+          <p style="color:red;">{{ serverErrors.errors.name }}</p>
+          <p style="color:red;">{{ serverErrors.errors.email }}</p>
+        </div>
+
+        <!-- Name -->
+        <input type="text" formControlName="name" id="name" class="form-control mb-4" placeholder="Full Name">
+        <div *ngIf="name.invalid && (name.dirty || name.touched)">
+            <div *ngIf="name.errors?.required">
+                Name is required.
+            </div>
+        </div> 
+  
+        <!-- E-mail -->
+        <input type="email" formControlName="email" id="email" class="form-control mb-4" placeholder="E-mail">
+          <div *ngIf="email.invalid && (email.dirty || email.touched)">
+            <div *ngIf="email.errors?.required">
+                Email is required.
+            </div>
+            <div *ngIf="email.errors?.email">
+                Invalid email address.
+            </div>
+        </div> 
+  
+        <!-- Password -->
+        <input type="password" formControlName="password" id="password" class="form-control" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock">
+        <small id="passwordHelpBlock" class="form-text text-muted mb-4">
+          At least 8 characters and 1 digit
+        </small>
+        <div *ngIf="password.invalid && (password.touched || password.dirty)">
+          <div *ngIf="password.errors?.required">
+            Password is required.
+          </div>
+        </div>
+          
+        <!-- Sign up button -->
+        <button mdbBtn color="info" block="true" [disabled]="!registerForm.valid" class="my-4" type="submit">Sign in</button>
+   
+      </form>
+      <!-- Default form register -->
+</div>
+</div>

@@ -1,0 +1,13 @@
+<h1>I am the Parent</h1>
+
+
+
+<p>----------Parent to child--------------</p>
+<app-child-study
+    [master]="master">
+</app-child-study>
+
+<app-child-study
+    (childMessage)="displayChildMessage($event)">
+</app-child-study>
+<p>----------------------End of the child------------------</p>

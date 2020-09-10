@@ -1,0 +1,39 @@
+
+<div class="container">
+    <p>dashboard works!</p>
+    <div class="row">
+        <div class="col-md-5">            
+            <button mdbBtn color="info" class="my-4" (click)="logout()">Logout</button>
+            <!-- <button mdbBtn color="info" class="my-4" (click)="getUser()">Get My Details</button> -->
+        </div>
+
+        <div class="col-md-7" *ngIf="userDetails">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Roles</th>
+                    </tr>
+                </thead>
+                <tbody>
+    
+                <tr>
+                    <th>{{ userDetails.data }} 
+                        <span *ngFor="let roles of userDetails.role">
+                            {{ roles }}
+                        </span>
+                    </th>
+                    <td *ngFor="let roles of userDetails.role">
+                        {{ roles }}
+                    </td>
+                </tr>
+                </tbody>         
+            </table>
+        </div>
+    </div>
+    
+</div>
+
+
+
+

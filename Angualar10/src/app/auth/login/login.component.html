@@ -1,0 +1,37 @@
+<div class="row justify-content-center">
+<div class="col-5">
+    <!-- Default form login -->
+    
+    <div *ngIf="serverErrors">
+        <p style="color:red;">{{ serverErrors.errors.email[0] }}</p>
+        <p style="color:red;">{{ serverErrors.errors.password }}</p>
+        <p style="color:red;">{{ serverErrors.errors.email }}</p>
+      </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="loginFormData()" class="text-center border border-light p-5">
+        <p class="h4 mb-4">Sign in</p>    
+        <!-- Email -->
+        <input type="email" formControlName="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail">
+        <div *ngIf="email.invalid && (email.dirty || email.touched)">
+            <div *ngIf="email.errors?.required">
+                Email is required.
+            </div>
+            <div *ngIf="email.errors?.email">
+                Invalid email address.
+            </div>
+        </div> 
+    
+        <!-- Password -->
+        <input type="password" formControlName="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password">
+        <div *ngIf="password.invalid && (password.dirty || password.touched)">
+            <div *ngIf="password.errors?.required">
+                Password is required.
+            </div>
+        </div>
+
+        <!-- Sign in button -->
+        <button mdbBtn color="info" block="true" class="my-4" [disabled]="!loginForm.valid" type="submit">Sign in</button>        
+    </form>
+  <!-- Default form login -->
+</div>
+</div>
