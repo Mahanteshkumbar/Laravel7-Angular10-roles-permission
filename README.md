@@ -16,8 +16,8 @@ It is a full Laravel project that you should use as a starter project and implem
 * Run `php artisan migrate`
 * Run `php artisan db:seed`
 * Run `php artisan passport:install`
-* That's it: http://localhost/adminDash/public/api/(Run on any localhost server)
-* In my setup: http://localhost/php%20practice/adminDash/public/api/register(Auth.service.ts and Dashboard.service.ts). Change Api services in Angular10 application accordingly)
+* That's it: http://localhost/adminDash/public/api/  (Run on any localhost server)
+* In my setup: http://localhost/php%20practice/adminDash/public/api/register  (Auth.service.ts and Dashboard.service.ts). Change Api services in Angular10 application accordingly)
 
 [Laravel Sanctum Package](https://laravel.com/docs/7.x/sanctum)
 
