@@ -46,13 +46,13 @@ Admin: admin@admin.com Password: password(For more details check database/seeder
 User: user@user.com Password:password(For more details check database/seeder/UserSeeder)
 
 # Home Page
-![picture alt](https://github.com/Mahanteshkumbar/Laravel7-Angular10-roles-permission/master/screens/login.png)
+![picture alt](https://github.com/Mahanteshkumbar/Laravel7-Angular10-roles-permission/blob/master/screens/login.PNG)
 
 # Login
-![picture alt](https://github.com/Mahanteshkumbar/Laravel7-Angular10-roles-permission/blob/master/screens/register.png)
+![picture alt](https://github.com/Mahanteshkumbar/Laravel7-Angular10-roles-permission/blob/master/screens/register.PNG)
 
 # Dashboard Admin
-![picture alt](https://github.com/Mahanteshkumbar/Laravel7-Angular10-roles-permission/blob/master/screens/dashboard.png)
+![picture alt](https://github.com/Mahanteshkumbar/Laravel7-Angular10-roles-permission/blob/master/screens/dashboard.PNG)
 
 # Dashboard Normal User
-![picture alt](https://github.com/Mahanteshkumbar/Laravel7-Angular10-roles-permission/blob/master/screens/user.png)
+![picture alt](https://github.com/Mahanteshkumbar/Laravel7-Angular10-roles-permission/blob/master/screens/user.PNG)
