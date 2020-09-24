@@ -51,6 +51,9 @@ User: user@user.com Password:password(For more details check database/seeder/Use
 # Login
 ![picture alt](https://github.com/Mahanteshkumbar/Laravel7-Angular10-roles-permission/blob/master/screens/register.PNG)
 
+# Dashboard With Profile Pic, Pagination and User login logs
+![picture alt](https://github.com/Mahanteshkumbar/Laravel7-Angular10-roles-permission/blob/master/screens/dashnew.PNG)
+
 # Dashboard Admin
 ![picture alt](https://github.com/Mahanteshkumbar/Laravel7-Angular10-roles-permission/blob/master/screens/dashboard.PNG)
 
