@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use App\Events\EventExample;
 use App\User;
 
 class LoginController extends Controller
@@ -29,6 +30,8 @@ class LoginController extends Controller
 
         //send token to the register user
         $token = $user->createToken('Laravel-Sanctum')->plainTextToken;
+
+       event(new EventExample($user));
             
         return response()->json([
             'status_code' => 200,

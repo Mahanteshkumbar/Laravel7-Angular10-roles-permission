@@ -1,34 +1,112 @@
 
 <div class="container">
     <p>dashboard works!</p>
-    <div class="row">
-        <div class="col-md-5">            
-            <button mdbBtn color="info" class="my-4" (click)="logout()">Logout</button>
-            <!-- <button mdbBtn color="info" class="my-4" (click)="getUser()">Get My Details</button> -->
+    <div class="row" *ngIf="userDetails">
+        <div class="col-md-3">
+            <mdb-card *ngIf="userDetails.profile">
+                <!--Card image-->
+                <mdb-card-img src="http://localhost/php%20practice/adminDash/public/storage/profile/{{ userDetails.profile.file_name }}" height="40" alt="{{ userDetails.profile.file_name }}"></mdb-card-img>
+                <!--Card content-->
+                <mdb-card-body>
+                    <div class="row">
+                    <div class="col-md-6">
+                        <mdb-card-text> 
+                            Welcome back 
+                        </mdb-card-text>
+                        <mdb-card-title>
+                            <h4>{{ userDetails.user }}</h4>
+                          </mdb-card-title>
+                    </div>
+                    <div class="col-md-6">
+                        <!--Text-->
+                        <a href="#" mdbBtn color="primary" mdbWavesEffect (click)="logout()" size="sm">Logout</a>
+                        
+                    </div>
+                </div>                  
+                </mdb-card-body>
+              </mdb-card>
+            <br>
+
+            <div *ngIf="successResult" style="color: green;">
+                {{ successResult.message }}
+            </div>
+
+            <div *ngIf="serverErrors">
+                <p style="color:red;">{{ serverErrors.errors.image }}</p>
+              </div>
+
+            <form [formGroup]="profileData" (ngSubmit)="updateUserProfile()" novalidate>
+                <input type="file" formControlName="image" (change)="fileEvent($event)" class="form-control" required/>
+                <div *ngIf="image.invalid && (image.dirty || image.touched)">
+                    <div *ngIf="image.errors?.required">
+                        image is required.
+                    </div>
+                </div> 
+                <button type="submit" mdbBtn color="success" size="sm" class="" [disabled]="!profileData.valid" >Upload Profile Pic</button>
+            </form>
+
         </div>
 
-        <div class="col-md-7" *ngIf="userDetails">
-            <table class="table table-bordered">
+        <div class="col-md-9">
+            <table class="table table-bordered" aria-describedby="user role details">
                 <thead>
                     <tr>
-                        <th>Data</th>
-                        <th>Roles</th>
+                        <th scope="col">Data</th>
+                        <th scope="col">Roles</th>
                     </tr>
                 </thead>
                 <tbody>
     
                 <tr>
-                    <th>{{ userDetails.data }} 
+                    <th scope="row">{{ userDetails.data }} 
                         <span *ngFor="let roles of userDetails.role">
                             {{ roles }}
                         </span>
                     </th>
-                    <td *ngFor="let roles of userDetails.role">
-                        {{ roles }}
+                    <td>
+                        <p *ngFor="let roles of userDetails.role">{{ roles }}</p>
                     </td>
                 </tr>
                 </tbody>         
             </table>
+
+
+            <table class="table table-bordered" aria-describedby="user logs table">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>                       
+                        <th scope="col">Ip Address</th>
+                        <th scope="col">Message</th>
+                        <th scope="col">Timestamp</th>
+                    </tr>
+                </thead>
+                <tbody>
+    
+                <tr *ngFor="let log of userDetails.logs.data; let id = index">
+                    <th scope="row">{{ id+1 }}</th>
+                    <td>{{ log.ip_address }}</td>
+                    <td>{{ log.message }}</td> 
+                    <td>{{ log.created_at | date:'dd-MM-yyyy, h:mm a' }}</td>
+                </tr>
+                </tbody>         
+            </table>
+
+            <div>
+
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination pg-blue">
+                      <li class="page-item" [ngClass]="(userDetails.logs.prev_page_url == null)?'disabled':''">
+                        <span class="page-link" (click)="nextPage(userDetails.logs.prev_page_url)">Previous</span>
+                      </li>
+
+                      <li class="page-item" *ngFor="let page of [].constructor(userDetails.logs.last_page); let i=index" [ngClass]="(userDetails.logs.current_page == (i+1))?'active':''"><a class="page-link" mdbWavesEffect (click)="individualPage(userDetails.logs.path,i+1)">{{ i+1 }}</a></li>
+
+                      <li class="page-item" [ngClass]="(userDetails.logs.next_page_url == null)?'disabled':''">
+                        <a class="page-link" mdbWavesEffect (click)="nextPage(userDetails.logs.next_page_url)">Next</a>
+                      </li>
+                    </ul>
+                  </nav>                
+              </div>
         </div>
     </div>
     

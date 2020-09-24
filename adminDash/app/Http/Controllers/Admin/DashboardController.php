@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
-Use App\User;
+use App\User;
+use App\Profile;
 
 class DashboardController extends Controller
 {
@@ -18,7 +19,10 @@ class DashboardController extends Controller
     {
         //
         return response()->json(['data' => 'Logged in as:- ',
-                                 'role' => Auth::user()->getRoleNames()
+                                 'role' => Auth::user()->getRoleNames(),
+                                 'logs' => Auth::user()->userlog()->paginate(2),
+                                 'profile' => Auth::user()->profile,
+                                 'user' => Auth::user()->name
                                 ]);
     }
 
@@ -40,7 +44,24 @@ class DashboardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'image' => ['required','mimes:jpg,png,JPEG,jpeg']
+        ]);
+      
+        if ($request->hasFile('image')){
+            try {
+                //code...
+                $filename = date('His').'-'.$request->file('image')->getClientOriginalName();
+                $path = $request->file('image')
+                        ->storeAs('public\profile',$filename);
+            
+                Profile::updateOrCreate(['user_id' => Auth::user()->id],['path' => $path,'file_name' => $filename,'user_id' => Auth::user()->id]);
+                
+                return response()->json(["message" => "Image Uploaded Succesfully","file name" => $filename,"path" => $path]);
+            } catch (\Exception $e) {
+                abort(response()->json(["message" => $e->getMessage(), $e->getCode()]));
+            }            
+        }
     }
 
     /**
